@@ -11,35 +11,33 @@ passport.serializeUser((user, done) => {
 });
 //deserialize user token which coming from http request
 passport.deserializeUser((id, done) => {
-	User.findById(id)
-		.then(user => {
-			done(null, user);
-		});
+	User.findById(id).then(user => {
+		done(null, user);
+	});
 });
 
 //console.developers.google.com
 passport.use(
-	new GoogleStrategy({
-		clientID: keys.googleClientID,
-		clientSecret: keys.googleClientSecret,
-		callbackURL: '/auth/google/callback',
-		// fix trust heroku proxy
-		proxy: true
-	}, (accessToken, refreshToken, profile, done) => {
-		User.findOne({
-			googleId: profile.id
-		})
-		.then(existingUser => {
+	new GoogleStrategy(
+		{
+			clientID: keys.googleClientID,
+			clientSecret: keys.googleClientSecret,
+			callbackURL: '/auth/google/callback',
+			// fix trust heroku proxy
+			proxy: true
+		},
+		async (accessToken, refreshToken, profile, done) => {
+			const existingUser = await User.findOne({
+				googleId: profile.id
+			});
 			if (existingUser) {
-				done(null, existingUser);
-			} else {
-				new User({ 
-					googleId: profile.id,
-					name: profile.displayName
-				})
-				.save()
-				.then(user => done(null, user));
+				return done(null, existingUser);
 			}
-		});
-	})
+			const user = await new User({
+				googleId: profile.id,
+				name: profile.displayName
+			}).save();
+			done(null, user);
+		}
+	)
 );
