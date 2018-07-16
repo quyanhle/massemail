@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
+// import proxy from 'http-proxy-middleware';
+//proxy for redirect client route to backend API route
 
 export const fetchUser = () => async dispatch => {
 	const res = await axios.get('/api/current_user');

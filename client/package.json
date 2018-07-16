@@ -2,19 +2,18 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
+   "proxy": {
     "/auth/google": {
-      "target": "http://massemail.com:5000",
-      "ws": true
+      "target": "http://massemail.com:5000"
     },
     "/api/*": {
-      "target": "http://massemail.com:5000",
-      "ws": true
+      "target": "http://massemail.com:5000"
     }
   },
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
+    "http-proxy-middleware": "^0.18.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
