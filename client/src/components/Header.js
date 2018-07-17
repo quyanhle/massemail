@@ -16,15 +16,14 @@ class Header extends Component {
 				);
 			default:
 				return [
-					<li><Payments /></li>,
-					<li>
+					<li key="1"><Payments /></li>,
+					<li key="2">
 						<a href="/api/logout">Log out</a>
 					</li>
 				];
 		}
 	}
 	render() {
-		console.log(this.props);
 		return (
 			<nav>
 				<div className="nav-wrapper teal lighten-2">
