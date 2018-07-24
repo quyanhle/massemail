@@ -8,5 +8,6 @@ module.exports = {
 	stripePublishableKey: 'pk_test_dfmTwwGlBcgJHYEsB1LVpi2i',
 	stripeSecretKey: 'sk_test_j1iWEuMU4v7cPPZRM4YcaJok',
 	sendGridKey:
-		'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'
+		'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',
+	redirectDomain: 'http://massemail.com:3000'
 };
